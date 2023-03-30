@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import './pages/home_page.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:grocery_app/pages/home_page.dart';
+
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});
@@ -14,17 +16,24 @@ class WelcomePage extends StatelessWidget {
           // first its the LOGO (image or icon) at the top
           Padding(
             padding: const EdgeInsets.only(
-                left: 80, right: 80, bottom: 40, top: 120),
+                left: 80, right: 80, bottom: 40, top: 100),
             child: Image.asset('lib/images/egg.png'),
           ),
 
           // second part will be the welcome message
-          const Padding(
-            padding: EdgeInsets.all(25),
+          Padding(
+            padding: const EdgeInsets.all(25),
             child: Text(
-              "We deliver quality foods right at your doorstep",
+              "We deliver quality right at your doorstep",
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 40, fontWeight: FontWeight.w600),
+              style: GoogleFonts.notoSerif(
+                textStyle: const TextStyle(
+                  fontSize: 40,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 1.0
+                )
+              ),
             ),
           ),
 
@@ -40,7 +49,11 @@ class WelcomePage extends StatelessWidget {
           //last will be the -Get Started- button
 
           GestureDetector(
-            onTap: () => {},
+            onTap: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)
+            {
+              return const HomePage();
+            }
+            )),
             child: Container(
               padding: const EdgeInsets.all(24),
               decoration: BoxDecoration(
