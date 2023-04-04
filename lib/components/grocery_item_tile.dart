@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
+import '../model/cart_model.dart';
 
 class GroceryItemTile extends StatelessWidget {
   final String itemName;
   final String itemPrice;
   final String imagePath; //return the egg image till all images are sorted
   final color; // color != belong to neither string, number or bool values
+  void Function()? onPressed;
 
-  const GroceryItemTile(
+  GroceryItemTile(
     {
       super.key,
       required this.itemName,
       required this.itemPrice,
       required this.imagePath,
-      required this.color
+      required this.color, required this.onPressed
     }
   );
 
@@ -44,7 +46,7 @@ class GroceryItemTile extends StatelessWidget {
 
           // button and price
           MaterialButton(
-            onPressed: (){},
+            onPressed: onPressed,
             color: color,
             child: Text('R $itemPrice',
             style: const TextStyle(

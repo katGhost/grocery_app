@@ -4,7 +4,6 @@ import 'package:grocery_app/model/cart_model.dart';
 import 'package:grocery_app/welcome_page.dart';
 import '../components/grocery_item_tile.dart';
 import 'package:provider/provider.dart';
-
 import 'cart_page.dart';
 
 
@@ -178,15 +177,18 @@ class HomePage extends StatelessWidget {
                       // item card == square on default, view can be changed below
                       childAspectRatio: 1 / 1.3,
                   ),
-                  itemBuilder: ((context, index) {
+                  itemBuilder: (context, index) {
                     return GroceryItemTile(
                       itemName: value.storeItems[index][0],
                       itemPrice: value.storeItems[index][1],
                       imagePath: value.storeItems[index][2],
                       color: value.storeItems[index][3],
+                      //call the addtoCart method
+                      onPressed: () {
+                        Provider.of<CartModel>(context, listen: false).addToCart(index);
+                      }
                     );
-                  }
-                  ),
+                  },
                 );
                 },
                 ),
