@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:grocery_app/model/cart_model.dart';
 import '../components/grocery_item_tile.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -68,17 +70,28 @@ class HomePage extends StatelessWidget {
 
               // Grid View of which all items can be viewed
               Expanded(
-                child: GridView.builder(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                child: Consumer<CartModel>(builder: (context, value, child) {
+                  return GridView.builder(
+                    itemCount: value.storeItems.length,
+                    padding: const EdgeInsets.all(12.0),
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
+                      // item card == square on default, view can be changed below
+                      childAspectRatio: 1 / 1.3,
                   ),
                   itemBuilder: ((context, index) {
-                    return const GroceryItemTile();
+                    return GroceryItemTile(
+                      itemName: value.storeItems[index][0],
+                      itemPrice: value.storeItems[index][1],
+                      imagePath: value.storeItems[index][2],
+                      color: value.storeItems[index][3],
+                    );
                   }
                   ),
+                );
+                },
                 ),
               ),
-
               //drawer and a logout button, takes user to the start page
             ]),
       ),
